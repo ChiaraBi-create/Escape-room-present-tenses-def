@@ -1,0 +1,760 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Museum of Stolen Grammar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a museum at night. Bottle-green gallery walls; every exercise hangs in a gilt frame on a cream mat; items are catalogue labels; the final room is a lit vitrine with the Carousel Mug. Single committed look. */
+:root{
+  --wall:#1d3831; --wall-2:#162c26; --wall-line:#2c4a41;
+  --gold:#c9a24a; --gold-light:#f0d68e; --gold-dark:#7a5e22;
+  --mat:#f2ecdd; --label:#fbf8f0; --ink:#1d1c19; --ink-muted:#6d665a; --rule:#d9d0bc;
+  --velvet:#8f1f2c; --ok:#2e7a52; --bad:#b4271f; --mark:#f3dd9b;
+  --fg:#efe8d8; --fg-muted:#a6b7ae;
+  --f-display:"Gloock","Didot","Bodoni 72",Georgia,serif;
+  --f-body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"DM Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{background:var(--wall);color:var(--fg)}
+body{font-family:var(--f-body);font-size:16px;line-height:1.5;padding-inline:16px;padding-block:0 56px;
+  background-image:radial-gradient(ellipse 70% 45% at 50% 0%,rgba(240,214,142,.10),transparent 70%),
+  repeating-linear-gradient(90deg,transparent 0 118px,rgba(0,0,0,.06) 118px 120px)}
+.wrap{max-width:940px;margin:0 auto}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--gold-light);outline-offset:2px}
+
+/* ---- rail ---- */
+.rail{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--wall-2);border-bottom:1px solid var(--wall-line);margin-inline:-16px;padding:10px 16px;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between}
+.brand{font-family:var(--f-display);font-size:19px;line-height:1.1}
+.brand small{display:block;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.tokens{display:flex;gap:5px;align-items:center}
+.tok{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-display);font-size:15px;border:1px dashed var(--wall-line);color:var(--fg-muted)}
+.tok.got{border:0;background:radial-gradient(circle at 35% 30%,var(--gold-light),var(--gold) 55%,var(--gold-dark));color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.4)}
+.tok.here{border:1px solid var(--gold)}
+.clock{display:flex;gap:8px;align-items:center}
+.time{font-family:var(--f-mono);font-weight:500;font-size:24px;font-variant-numeric:tabular-nums;color:var(--gold-light);min-width:5ch;text-align:right}
+.time.over{color:#ff8a7a}
+.mini{border:1px solid var(--wall-line);background:transparent;border-radius:3px;padding:4px 10px;font-family:var(--f-mono);font-size:12px;color:var(--fg-muted)}
+.mini:hover{color:var(--fg);border-color:var(--fg-muted)}
+
+/* ---- room sign ---- */
+.sign{margin-top:34px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 18px;align-items:end}
+.sign .num{grid-row:span 2;font-family:var(--f-display);font-size:clamp(56px,10vw,96px);line-height:.8;color:var(--gold)}
+.sign .kicker{font-family:var(--f-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-muted)}
+.sign h2{font-family:var(--f-display);font-weight:400;font-size:clamp(30px,5vw,46px);line-height:1;margin:0;text-wrap:balance}
+.story{max-width:64ch;color:var(--fg);margin:16px 0 0;font-size:17px}
+.rope{display:block;width:100%;height:26px;margin:14px 0 4px}
+
+/* ---- gilt frame ---- */
+.frame{position:relative;margin-top:18px;background:var(--mat);color:var(--ink);padding:clamp(16px,3.2vw,34px);
+  border:14px solid var(--gold);border-image:linear-gradient(135deg,#7a5e22,#e9cd82 22%,#9c7b2e 45%,#f3dc97 65%,#8a6a28 85%,#c9a24a) 1;
+  box-shadow:0 22px 44px rgba(0,0,0,.45),inset 0 0 0 1px #c4b28a,inset 0 0 22px rgba(120,95,40,.18);min-width:0}
+.frame::after{content:"";position:absolute;inset:-14px;pointer-events:none;box-shadow:inset 0 0 0 2px rgba(60,40,10,.55)}
+.task{margin:0 0 20px;max-width:66ch;font-size:16px}
+.task b{font-weight:700}
+.legend{font-family:var(--f-mono);font-size:12px;color:var(--ink-muted);letter-spacing:.06em}
+mark.key{background:linear-gradient(transparent 55%,var(--mark) 55%);color:inherit;padding:0 2px;font-weight:600}
+
+/* catalogue labels */
+.labels{display:grid;gap:10px}
+.lbl{background:var(--label);border:1px solid var(--rule);padding:12px 14px;display:grid;grid-template-columns:3.4em minmax(0,1fr);gap:4px 10px;align-items:baseline}
+.lbl .cat{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;color:var(--ink-muted)}
+.lbl .txt{font-size:17px;line-height:1.9}
+.lbl input{font:inherit;font-weight:600;background:transparent;color:var(--ink);border:0;border-bottom:2px solid var(--ink);padding:0 4px;width:min(100%,13ch)}
+.lbl .base{font-family:var(--f-mono);font-size:13px;color:var(--ink-muted);white-space:nowrap}
+.lbl.ok{border-color:var(--ok);box-shadow:inset 3px 0 0 var(--ok)} .lbl.ok input{border-color:var(--ok);color:var(--ok)}
+.lbl.bad{border-color:var(--bad);box-shadow:inset 3px 0 0 var(--bad)} .lbl.bad input{border-color:var(--bad)}
+
+/* forms table */
+.tablewrap{overflow-x:auto}
+table.forms{border-collapse:collapse;width:100%;min-width:480px;background:var(--label);color:var(--ink);font-size:17px}
+table.forms.nq{min-width:720px}
+.forms th{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted);text-align:left;padding:8px 10px;border-bottom:2px solid var(--ink);font-weight:500}
+.forms td{padding:8px 10px;border-bottom:1px solid var(--rule);font-size:17px}
+.forms td:first-child{font-weight:600;white-space:nowrap}
+.forms td:first-child span{font-weight:400;color:var(--ink-muted)}
+.forms input{font:inherit;font-weight:600;width:100%;min-width:9ch;background:transparent;border:0;border-bottom:2px solid var(--ink);padding:2px 4px;color:var(--ink)}
+.forms input.ok{border-color:var(--ok);color:var(--ok)} .forms input.bad{border-color:var(--bad);color:var(--bad)}
+
+/* builder */
+.builds{display:grid;gap:12px}
+.build{background:var(--label);border:1px solid var(--rule);padding:12px 14px;display:grid;gap:10px}
+.build.ok{box-shadow:inset 3px 0 0 var(--ok);border-color:var(--ok)} .build.bad{box-shadow:inset 3px 0 0 var(--bad);border-color:var(--bad)}
+.from{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline;font-size:16px;color:var(--ink-muted)}
+.from b{font-family:var(--f-mono);font-weight:500;font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--mat);padding:2px 7px}
+.line{min-height:42px;border-bottom:2px solid var(--ink);display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:4px 0}
+.line:empty::before{content:"Tap the words in order";color:var(--ink-muted);font-size:14px;font-style:italic}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:16px;background:var(--mat);border:1px solid var(--ink);border-radius:2px;padding:4px 10px;color:var(--ink)}
+.chip.used{visibility:hidden}
+.line .chip{background:var(--ink);color:var(--mat)}
+.clear{justify-self:end;background:transparent;border:0;font-size:13px;color:var(--ink-muted);text-decoration:underline;padding:0}
+
+/* CCTV */
+.cams{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:12px}
+.cam{background:#0f1714;color:#dfe8e3;padding:12px 14px;border:6px solid #2b2b28;min-width:0;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 2px,transparent 2px 4px)}
+.camhead{display:flex;justify-content:space-between;gap:8px;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;color:#8fa59a;margin-bottom:8px}
+.camhead .rec{color:#ff6b5b}
+.camtext{font-size:17px;margin:0 0 10px}
+.blank{display:inline-block;min-width:5ch;border-bottom:2px solid currentColor;text-align:center;font-weight:600}
+.cam .blank{color:var(--gold-light)}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{background:#1d2a25;border:1px solid #3a4f46;border-radius:2px;padding:5px 12px;color:#e5ece8}
+.opt[aria-pressed="true"]{background:var(--gold);border-color:var(--gold-light);color:var(--ink);font-weight:600}
+
+/* diary */
+.diary{background:#fffdf6;border:1px solid var(--rule);padding:clamp(16px,3vw,28px);font-family:var(--f-display);font-size:clamp(18px,2.2vw,21px);line-height:2.1;background-image:repeating-linear-gradient(transparent 0 calc(2.1em - 1px),rgba(70,110,160,.18) calc(2.1em - 1px) 2.1em);max-width:70ch}
+.diary .date{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;color:var(--ink-muted);display:block;line-height:2}
+.diary select{font-family:var(--f-body);font-size:16px;font-weight:600;background:var(--mat);color:var(--ink);border:1px solid var(--ink);border-radius:2px;padding:1px 4px;max-width:100%}
+
+/* suspects */
+.suspects{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:10px}
+.sus{background:var(--label);border:1px solid var(--rule);padding:12px 14px;text-align:left;display:grid;gap:4px;color:var(--ink)}
+.sus .tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;color:var(--ink-muted)}
+.sus .say{font-size:17px}
+.sus[aria-pressed="true"]{border-color:var(--velvet);background:#f6e3e1;box-shadow:inset 3px 0 0 var(--velvet)}
+.sus[aria-pressed="true"] .tag{color:var(--velvet)}
+.sus[aria-pressed="true"] .tag::after{content:" · ARRESTED"}
+
+/* actions */
+.actions{margin-top:22px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{font-family:var(--f-body);font-weight:600;font-size:16px;border:2px solid var(--ink);background:var(--ink);color:var(--mat);padding:10px 18px;border-radius:2px}
+.btn:hover{background:#000}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:rgba(0,0,0,.05)}
+.msg{flex-basis:100%;margin:0;min-height:1.4em;font-weight:600}
+.msg.bad{color:var(--bad)} .msg.ok{color:var(--ok)}
+.shake{animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* hints */
+.hints{margin-top:24px;border-top:1px solid var(--rule);padding-top:14px;display:grid;gap:10px}
+.hintrow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:14px;color:var(--ink-muted)}
+.hint{background:var(--label);border-left:3px solid var(--gold);padding:10px 14px;max-width:68ch;font-size:15px}
+.hint b{font-family:var(--f-mono);font-weight:500;font-size:11px;letter-spacing:.12em;margin-right:8px;color:var(--gold-dark)}
+
+/* unlock */
+.unlock{margin-top:24px;background:var(--label);border:1px solid var(--rule);padding:18px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px 18px;align-items:center}
+@media (max-width:520px){.unlock{grid-template-columns:1fr}}
+.coin{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-display);font-size:30px;color:var(--ink);background:radial-gradient(circle at 35% 30%,var(--gold-light),var(--gold) 55%,var(--gold-dark));box-shadow:0 4px 10px rgba(0,0,0,.3),inset 0 0 0 4px rgba(255,255,255,.25);animation:drop .6s cubic-bezier(.2,1.5,.4,1) both}
+@keyframes drop{from{transform:translateY(-30px) rotate(-30deg);opacity:0}}
+.unlock h3{font-family:var(--f-display);font-weight:400;font-size:26px;margin:0;line-height:1.1}
+.unlock p{margin:4px 0 0;color:var(--ink-muted)}
+.casenote{grid-column:1/-1;border-top:1px solid var(--rule);padding-top:12px;font-size:15px}
+.casenote b{font-family:var(--f-mono);font-weight:500;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-muted);display:block;margin-bottom:4px}
+.casenote ul{margin:0;padding-left:18px;display:grid;gap:3px}
+.unlock .btn{grid-column:1/-1;justify-self:start}
+
+/* intro */
+.hero{margin-top:30px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:28px;align-items:center}
+@media (max-width:760px){.hero{grid-template-columns:1fr}}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(42px,7.5vw,78px);line-height:.95;margin:6px 0 14px;text-wrap:balance}
+.hero h1 em{color:var(--gold-light);font-style:normal}
+.kick{font-family:var(--f-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.vitrine{width:100%;max-width:360px;justify-self:center;display:block}
+.rules{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:8px;max-width:60ch;color:var(--fg)}
+.rules li{display:grid;grid-template-columns:1.8em 1fr;gap:6px;font-size:15px}
+.rules li span:first-child{font-family:var(--f-display);color:var(--gold);font-size:18px;line-height:1.2}
+.plan{display:flex;flex-wrap:wrap;gap:6px;margin:18px 0 0;padding:0;list-style:none}
+.plan li{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;border:1px solid var(--wall-line);padding:3px 9px;color:var(--fg-muted)}
+.ticket{margin-top:26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px;align-items:end;background:var(--mat);color:var(--ink);padding:18px;border-left:6px dashed var(--wall)}
+.ticket label{display:grid;gap:4px;font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted)}
+.ticket input,.ticket select{font:inherit;font-family:var(--f-body);font-size:16px;letter-spacing:0;text-transform:none;color:var(--ink);background:var(--label);border:1px solid var(--rule);padding:9px 10px;width:100%}
+.ticket .btn{width:100%}
+.reset{margin-top:22px;color:var(--fg-muted);font-size:13px}
+.restartbtn{color:var(--gold-light);border-color:var(--gold-dark)}
+.restartbtn.armed{background:var(--velvet);border-color:#ff8a7a;color:#fff}
+
+/* vitrine room */
+.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center}
+@media (max-width:720px){.case{grid-template-columns:1fr}}
+.dials{display:flex;gap:6px;flex-wrap:wrap}
+.dial{display:grid;grid-template-rows:auto auto auto;justify-items:center;gap:2px}
+.dial button{width:40px;height:26px;background:var(--ink);color:var(--gold-light);border:0;border-radius:2px;font-size:12px}
+.dial .let{width:40px;height:52px;display:grid;place-items:center;font-family:var(--f-display);font-size:30px;background:linear-gradient(180deg,#b38b36,#f0d68e 45%,#a58032);color:var(--ink);border-radius:2px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.3)}
+.collected{font-family:var(--f-mono);font-size:13px;color:var(--ink-muted);margin:12px 0 0}
+.collected span{font-family:var(--f-display);font-size:20px;color:var(--ink);letter-spacing:.3em}
+#glass{transition:transform 1.2s cubic-bezier(.4,0,.2,1),opacity 1.2s}
+.open #glass{transform:translateY(-120px);opacity:0}
+#mugglow{opacity:0;transition:opacity 1.4s .6s}
+.open #mugglow{opacity:1}
+
+/* win */
+.motto{font-family:var(--f-display);font-size:clamp(30px,5vw,48px);line-height:1.1;margin:8px 0 10px;text-wrap:balance}
+.stats{display:flex;flex-wrap:wrap;gap:12px 30px;margin:14px 0 20px;font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;color:var(--ink-muted)}
+.stats b{display:block;font-family:var(--f-display);font-weight:400;font-size:38px;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+.notebook{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px}
+.nb{background:var(--label);border:1px solid var(--rule);padding:14px 16px;min-width:0}
+.nb h3{font-family:var(--f-display);font-weight:400;font-size:24px;margin:0 0 8px}
+.nb dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:15px}
+.nb dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-muted);padding-top:3px}
+.nb dd{margin:0}
+/* door opening */
+.door .leaf{transform-box:view-box}
+.door .leafL{transform-origin:74px 260px}
+.door .leafR{transform-origin:246px 260px}
+.door.opening .leafL{animation:swingL 2.2s .5s cubic-bezier(.5,0,.25,1) forwards}
+.door.opening .leafR{animation:swingR 2.2s .5s cubic-bezier(.5,0,.25,1) forwards}
+.door.opening .exitsign{animation:fadeout .6s .5s forwards}
+.door .star{animation:twinkle 2s ease-in-out infinite alternate}
+@keyframes swingL{to{transform:scaleX(.16) skewY(-9deg)}}
+@keyframes swingR{to{transform:scaleX(.16) skewY(9deg)}}
+@keyframes fadeout{to{opacity:0}}
+@keyframes twinkle{from{opacity:.35}to{opacity:1}}
+.doorwrap{display:grid;justify-items:center;gap:8px}
+.replay{color:var(--ink-muted);border-color:var(--rule)}
+@media (prefers-reduced-motion:reduce){
+  .door.opening .leafL{animation:none;transform:scaleX(.16) skewY(-9deg)}
+  .door.opening .leafR{animation:none;transform:scaleX(.16) skewY(9deg)}
+  .door.opening .exitsign{animation:none;opacity:0}
+  .door .star{animation:none}
+}
+/* sorting room */
+.sorts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.sortc{background:var(--label);border:1px solid var(--rule);padding:12px 10px 10px;display:grid;gap:10px;justify-items:center;text-align:center}
+.sortc .expr{font-family:var(--f-display);font-size:20px;line-height:1.1}
+.sortc.ps{border-color:var(--gold-dark);background:#f6ecd0}
+.sortc.pc{border-color:var(--wall);background:#e3ece7}
+.seg{display:inline-flex;border:1px solid var(--ink);border-radius:2px;overflow:hidden}
+.seg button{background:transparent;border:0;padding:4px 12px;font-family:var(--f-mono);font-size:12px;color:var(--ink)}
+.seg button+button{border-left:1px solid var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--mat)}
+.showcases{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:12px;margin-top:18px}
+.showcase{border:2px solid var(--gold);background:rgba(255,255,255,.5);padding:12px 14px;display:grid;gap:4px;font-size:15px}
+.showcase b{font-family:var(--f-mono);font-weight:500;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-muted)}
+
+/* ===== animations ===== */
+.enter .sign .num{animation:numdrop .7s .9s cubic-bezier(.2,1.4,.4,1) both}
+.enter .sign .kicker,.enter .sign h2{animation:fadeUp .6s 1s both}
+.enter .story,.enter .rope{animation:fadeUp .6s 1.15s both}
+.enter .frame{animation:frameIn .8s 1.2s cubic-bezier(.2,.8,.2,1) both}
+.enter .lbl,.enter tr,.enter .build,.enter .cam,.enter .sortc,.enter .sus,.enter .diary{animation:fadeUp .45s both;animation-delay:calc(1.6s + var(--i,0) * 70ms)}
+@keyframes numdrop{from{transform:translateY(-40px) rotate(-12deg);opacity:0}}
+@keyframes fadeUp{from{transform:translateY(14px);opacity:0}}
+@keyframes frameIn{from{transform:translateY(24px) scale(.97);opacity:0}}
+.curtain{position:fixed;inset:0;z-index:20;display:flex;pointer-events:none}
+.curtain i{flex:1;background:
+  repeating-linear-gradient(90deg,rgba(0,0,0,.28) 0 6px,transparent 6px 28px,rgba(255,255,255,.06) 28px 32px,transparent 32px 46px),
+  linear-gradient(180deg,#a3283a,#6e1522);box-shadow:inset 0 -14px 0 #c9a24a}
+.curtain i:first-child{animation:curtainL 1.3s .25s cubic-bezier(.6,0,.3,1) forwards}
+.curtain i:last-child{animation:curtainR 1.3s .25s cubic-bezier(.6,0,.3,1) forwards}
+@keyframes curtainL{to{transform:translateX(-102%)}}
+@keyframes curtainR{to{transform:translateX(102%)}}
+.tok.newkey{animation:keyglow 1.6s ease-out}
+@keyframes keyglow{0%{transform:scale(1)}25%{transform:scale(1.5);box-shadow:0 0 0 6px rgba(240,214,142,.5),0 0 22px 6px rgba(240,214,142,.8)}100%{transform:scale(1)}}
+.coin{animation:coinIn 1.1s cubic-bezier(.2,1.3,.4,1) both}
+@keyframes coinIn{0%{transform:translateY(-60px) rotateY(0) scale(.6);opacity:0}60%{transform:translateY(0) rotateY(540deg) scale(1.1);opacity:1}100%{transform:rotateY(720deg) scale(1)}}
+.unlock{animation:fadeUp .5s both}
+.unlock .casenote{animation:fadeUp .5s .5s both}
+.hint.fresh{animation:hintIn .45s cubic-bezier(.2,.8,.2,1) both}
+@keyframes hintIn{from{transform:translateY(-12px);opacity:0;max-height:0}to{max-height:200px}}
+.lbl.ok,.build.ok{animation:okflash .7s}
+@keyframes okflash{30%{background:#dff3e6}}
+.introdoor{justify-self:center;width:100%;max-width:360px}
+.introdoor .leaf g rect{animation:glint 3.2s ease-in-out infinite}
+.introdoor .leaf g:nth-of-type(2) rect{animation-delay:.25s}.introdoor .leaf g:nth-of-type(3) rect{animation-delay:.5s}
+.introdoor .leaf g:nth-of-type(4) rect{animation-delay:.75s}.introdoor .leaf g:nth-of-type(5) rect{animation-delay:1s}
+@keyframes glint{0%,70%,100%{filter:none}80%{filter:brightness(1.8) drop-shadow(0 0 4px #f0d68e)}}
+.hero h1{animation:fadeUp .8s both}
+.hero .story,.hero .rules{animation:fadeUp .8s .2s both}
+section{position:relative}
+.sparkles{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:4}
+.sparkles i{position:absolute;top:-12px;background:radial-gradient(circle,#fff6d0,#f0d68e 45%,#c9a24a 70%,transparent 72%);border-radius:50%;animation-name:fall;animation-timing-function:linear;animation-iteration-count:2;opacity:0}
+@keyframes fall{0%{transform:translateY(0) translateX(0);opacity:0}10%{opacity:1}100%{transform:translateY(105vh) translateX(30px);opacity:.2}}
+@media (prefers-reduced-motion:reduce){
+  .enter *, .curtain, .coin, .unlock, .hint.fresh, .tok.newkey, .lbl.ok, .build.ok, .introdoor *, .hero *, .sparkles{animation:none!important}
+  .curtain,.sparkles{display:none}
+}
+@media (prefers-reduced-motion:reduce){.shake,.coin{animation:none}#glass,#mugglow{transition:none}}
+</style>
+
+<div class="wrap">
+  <header class="rail" id="rail"></header>
+  <main id="app"></main>
+</div>
+
+<script>
+const dec=x=>[...decodeURIComponent(escape(atob(x)))].reverse().join('');
+
+/* =================== DATA =================== */
+/* Present simple · form */
+const FORM_S=[
+ {s:'he',v:'watch',a:'c2VoY3Rhdw=='},{s:'she',v:'study',a:'c2VpZHV0cw=='},{s:'they',v:'swim',a:'bWl3cw=='},
+ {s:'I',v:'write',a:'ZXRpcnc='},{s:'he',v:'go',a:'c2VvZw=='},{s:'she',v:'have',a:'c2Fo'},
+ {s:'it',v:'fly',a:'c2VpbGY='},{s:'he',v:'do',a:'c2VvZA=='},{s:'she',v:'play',a:'c3lhbHA='},{s:'we',v:'wash',a:'aHNhdw=='}
+];
+/* Present simple · negatives and questions */
+const NQ_S=[
+ {s:'she',v:'work',a:'a3JvdyBlaHMgc2VvZHxrcm93IHRvbiBzZW9k'},
+ {s:'they',v:'play',a:'eWFscCB5ZWh0IG9kfHlhbHAgdG9uIG9k'},
+ {s:'I',v:'read',a:'ZGFlciBpIG9kfGRhZXIgdG9uIG9k'},
+ {s:'he',v:'swim',a:'bWl3cyBlaCBzZW9kfG1pd3MgdG9uIHNlb2Q='},
+ {s:'we',v:'watch',a:'aGN0YXcgZXcgb2R8aGN0YXcgdG9uIG9k'}
+];
+const BUILD_S=[
+ {type:'Question',from:'She works at the museum every day.',w:'P3lhZCB5cmV2ZSBtdWVzdW0gZWh0IHRhIGtyb3cgZWhzIHNlb0Q=',extra:['Do','works']},
+ {type:'Negative',from:'The guard sleeps here every night.',w:'LnRoZ2luIHlyZXZlIGVyZWggcGVlbHMgdCduc2VvZCBkcmF1ZyBlaFQ=',extra:["don't",'sleeps']},
+ {type:'Question',from:'They visit museums on Sundays.',w:'P3N5YWRudVMgbm8gc211ZXN1bSB0aXNpdiB5ZWh0IG9E',extra:['Does','visits']},
+ {type:'Question',from:'The curator goes home at six every day. When …?',w:'P3lhZCB5cmV2ZSBlbW9oIG9nIHJvdGFydWMgZWh0IHNlb2QgbmVoVw==',extra:['do','goes']}
+];
+/* Present simple · use.  [[key]] = key expression, {_} = gap */
+const SIMPLE=[
+ {t:"The museum {_} at nine o'clock [[every morning]].",b:'open',a:'c25lcG8='},
+ {t:'My little brother [[always]] {_} the paintings!',b:'touch',a:'c2VoY3VvdA=='},
+ {t:'We [[never]] {_} photos with the flash.',b:'take',a:'ZWthdA=='},
+ {t:'The guide {_} [[on Sundays]].',b:'not / work',a:'a3JvdyB0b24gc2VvZA=='},
+ {t:'The cleaners {_} [[at the weekend]].',b:'not / come',a:'ZW1vYyB0b24gb2Q='},
+ {t:'{_} museums [[often]]?',b:'you / visit',a:'dGlzaXYgdW95IG9k'},
+ {t:'What time {_} [[every day]]?',b:'the café / close',a:'ZXNvbGMgw6lmYWMgZWh0IHNlb2Q='},
+ {t:'[[How often]] {_} the alarm?',b:'the guard / check',a:'a2NlaGMgZHJhdWcgZWh0IHNlb2Q='},
+ {t:'Do you come here [[every week]]? · Yes, I {_}.',b:'short answer',a:'b2Q='},
+ {t:'Does the museum open [[on Mondays]]? · No, it {_}.',b:'short answer',a:'dG9uIHNlb2Q='}
+];
+/* Present continuous · form */
+const FORM_C=[
+ {s:'he',v:'watch',a:'Z25paGN0YXcgc2k='},{s:'she',v:'study',a:'Z25peWR1dHMgc2k='},{s:'they',v:'swim',a:'Z25pbW1pd3MgZXJh'},
+ {s:'I',v:'write',a:'Z25pdGlydyBtYQ=='},{s:'it',v:'stop',a:'Z25pcHBvdHMgc2k='},{s:'we',v:'go',a:'Z25pb2cgZXJh'},
+ {s:'he',v:'lie',a:'Z25peWwgc2k='},{s:'she',v:'have',a:'Z25pdmFoIHNp'},{s:'you',v:'run',a:'Z25pbm51ciBlcmE='},{s:'I',v:'make',a:'Z25pa2FtIG1h'}
+];
+/* Present continuous · negatives and questions */
+const NQ_C=[
+ {s:'she',v:'work',a:'Z25pa3JvdyBlaHMgc2l8Z25pa3JvdyB0b24gc2k='},
+ {s:'they',v:'play',a:'Z25peWFscCB5ZWh0IGVyYXxnbml5YWxwIHRvbiBlcmE='},
+ {s:'I',v:'read',a:'Z25pZGFlciBpIG1hfGduaWRhZXIgdG9uIG1h'},
+ {s:'he',v:'swim',a:'Z25pbW1pd3MgZWggc2l8Z25pbW1pd3MgdG9uIHNp'},
+ {s:'we',v:'watch',a:'Z25paGN0YXcgZXcgZXJhfGduaWhjdGF3IHRvbiBlcmE='}
+];
+const BUILD_C=[
+ {type:'Question',from:'You are doing something right now. What …?',w:'P3dvbiB0aGdpciBnbmlvZCB1b3kgZXJhIHRhaFc=',extra:['do','does']},
+ {type:'Negative',from:'They are watching the cameras at the moment.',w:'LnRuZW1vbSBlaHQgdGEgc2FyZW1hYyBlaHQgZ25paGN0YXcgdCduZXJhIHllaFQ=',extra:["don't",'watch']},
+ {type:'Negative',from:'She is sleeping now.',w:'LndvbiBnbmlwZWVscyB0J25zaSBlaFM=',extra:["doesn't",'sleep']},
+ {type:'Question',from:'It is raining now.',w:'P3dvbiBnbmluaWFyIHRpIHNJ',extra:['Does','rain']}
+];
+/* Present continuous · use */
+const CONT=[
+ {t:'[[Look!]] A child {_} the dinosaur.',b:'climb',a:'Z25pYm1pbGMgc2k='},
+ {t:'[[This week]] we {_} a new exhibition.',b:'prepare',a:'Z25pcmFwZXJwIGVyYQ=='},
+ {t:'I {_} the labels [[today]].',b:'write',a:'Z25pdGlydyBtYQ=='},
+ {t:"The curator {_} [[now]]: she's in her office.",b:'not / sleep',a:'Z25pcGVlbHMgdG9uIHNp'},
+ {t:'The students {_} to the guide [[at the moment]].',b:'not / listen',a:'Z25pbmV0c2lsIHRvbiBlcmE='},
+ {t:'{_} the statues [[right now]]?',b:'they / clean',a:'Z25pbmFlbGMgeWVodCBlcmE='},
+ {t:'What {_} [[these days]]?',b:'you / do',a:'Z25pb2QgdW95IGVyYQ=='},
+ {t:'[[Listen!]] Where {_}?',b:'the guard / go',a:'Z25pb2cgZHJhdWcgZWh0IHNp'},
+ {t:'Is it raining [[now]]? · No, it {_}.',b:'short answer',a:'dG9uIHNp'},
+ {t:'Are you working [[today]]? · Yes, I {_}.',b:'short answer',a:'bWE='}
+];
+/* Sorting key expressions */
+const EXPR=['usually','right now','Look!','every night','never','this week','at the moment','on Sundays','often','today','twice a week','Listen!','always','these days','every day','now'];
+const EXPR_A='MTAxMDEwMTAwMTEwMDExMA==';
+/* Mix */
+const CAMS=[
+ {cam:'CAM 1 · WEST WINDOW',time:'22:47',pre:'Look! Someone',post:'the window.',o:['opens','is opening']},
+ {cam:'CAM 2 · CORRIDOR',time:'23:00',pre:'The guard',post:'his rounds every hour.',o:['does','is doing']},
+ {cam:'CAM 3 · GALLERY',time:'23:04',pre:'Listen! The alarm',post:'.',o:['rings','is ringing']},
+ {cam:'CAM 4 · FRONT DOOR',time:'18:00',pre:'The museum',post:'at 6 pm every day.',o:['closes','is closing']},
+ {cam:'CAM 5 · CONTROL DESK',time:'23:10',pre:'At the moment the guard',post:'the screens.',o:["doesn't watch","isn't watching"]},
+ {cam:'CAM 6 · ROOM 9',time:'23:12',pre:'',post:'every night?',o:['Does the carousel stop','Is the carousel stopping']}
+];
+const CAMS_A='MDEwMTAx';
+const DIARY_TXT="I'm Mr Grey, the night guard. I usually {0} here from ten to six, and every night I {1} all the rooms. But this week things are different: I {2} at night, because my colleague is ill and I'm on the day shift. Right now I {3} in the museum café and I {4} this diary. Visitors often {5} me about the old carousel in Room 9. It's the oldest object in the museum, and it never {6} turning. At the moment some children {7} it with their teachers.";
+const DIARY_O=[['work','am working'],['check','am checking'],["don't work",'am not working'],['sit','am sitting'],['write','am writing'],['ask','are asking'],['stops','is stopping'],['watch','are watching']];
+const DIARY_A='MTAwMTExMDA=';
+const SUSPECTS=["I'm knowing the answer now.",'Look! The carousel is turning.','She usually is having lunch at one.','Do your friends visit museums every summer?','Listen! Somebody sings.',"My brother doesn't go to museums on Sundays.","At the moment they don't working.",'Does he works here every day?','Is your sister studying this week?','What are you doing right now?'];
+const GUILTY='Nyw2LDQsMiww';
+
+const ROOMS=[
+ {num:'I',name:'The Workshop of Habits',sub:'Present simple · form',kind:'form',data:FORM_S,col:'Present simple',
+  story:'The museum begins with its oldest rooms: the ones about daily life. But the thieves broke the labels, and the verbs lost their endings.',
+  task:'<b>Write the present simple (affirmative) of each verb.</b> Careful with he / she / it and the spelling. You can write the subject or leave it out.'},
+ {num:'II',name:'The Archive of Habits',sub:'Present simple · negatives and questions',kind:'nq',data:NQ_S,builds:BUILD_S,
+  story:'In the archive, every witness of daily life must answer and deny. To do it, you need the helpers: do and does.',
+  task:'<b>Part A:</b> write the negative and the question (<i>she doesn\'t work · Does she work?</i>). <b>Part B:</b> rebuild each sentence by tapping the words in order; tap a word in your line to send it back. Two words in every box are traps.'},
+ {num:'III',name:'The Gallery of Habits',sub:'Present simple · use',kind:'gap',data:SIMPLE,
+  story:'This gallery shows what happens every day, every week, always. Every label describes a habit or a routine.',
+  task:'<b>Everything here is in the present simple.</b> Complete each label: affirmative, negative, question or short answer. The key expression is highlighted.'},
+ {num:'IV',name:'The Workshop of Now',sub:'Present continuous · form',kind:'form',data:FORM_C,col:'Present continuous',
+  story:'You enter the modern wing: everything here is moving. These labels need a helper verb and an -ing.',
+  task:'<b>Write the present continuous (affirmative): am / is / are + verb-ing.</b> Careful with the spelling of -ing. You can write the subject or leave it out.'},
+ {num:'V',name:'The Archive of Now',sub:'Present continuous · negatives and questions',kind:'nq',data:NQ_C,builds:BUILD_C,
+  story:'In this archive, the witnesses describe what is happening right now. To deny and to ask, they use am, is and are.',
+  task:'<b>Part A:</b> write the negative and the question (<i>she isn\'t working · Is she working?</i>). <b>Part B:</b> rebuild each sentence by tapping the words in order. Two words in every box are traps.'},
+ {num:'VI',name:'The Hall of Now',sub:'Present continuous · use',kind:'gap',data:CONT,
+  story:'In the Hall of Now, the labels describe what is happening at this very moment, or around now.',
+  task:'<b>Everything here is in the present continuous.</b> Complete each label: affirmative, negative, question or short answer. The key expression is highlighted.'},
+ {num:'VII',name:'The Hall of Clues',sub:'Key expressions · sort them',kind:'sort',
+  story:'Before the mixed rooms, the curator gives you the most useful tool of a detective: the clues. Sixteen key expressions hang on the wall, all mixed up.',
+  task:'<b>Put every key expression in the right showcase:</b> present simple (habits, routines) or present continuous (now, around now). Tap PS or PC under each card.'},
+ {num:'VIII',name:'The Control Room',sub:'Mix · simple or continuous?',kind:'cams',
+  story:'From here you can see the whole museum. Six cameras recorded the night, but the security report has holes in it.',
+  task:'<b>Now the two tenses are mixed.</b> Every sentence has a key expression: find it, then choose the right verb for each camera.'},
+ {num:'IX',name:"The Guard's Diary",sub:'Mix · simple or continuous?',kind:'diary',
+  story:'On a chair you find the night guard\'s diary, open on today\'s page. His routine has changed this week, and that is the clue.',
+  task:'<b>Choose the right verb for every gap.</b> Look for the key expression near each gap: habit, or now and this week?'},
+ {num:'X',name:'The Interrogation Room',sub:'Mix · find the mistakes',kind:'sus',
+  story:'Ten sentences were caught near the exit. Some are innocent. The guilty ones use the wrong tense for their key expression, or a broken form.',
+  task:'<b>Arrest only the guilty sentences.</b> Tap to arrest, tap again to release. Then hand them to the curator.'}
+];
+const LAST=ROOMS.length-1;
+
+const HINTS=[
+ ['I / you / we / they: base verb. He / she / it: verb + -s.','Spelling with other verbs: catch → catches, cry → cries, kiss → kisses, say → says (vowel + y: just -s).'],
+ ['Negative: don\'t / doesn\'t + base verb. Question: Do / Does + subject + base verb?','After does or doesn\'t the verb has no -s: she doesn\'t work · Does she work?'],
+ ['Negatives and questions use do or does + base verb. He / she / it need -s only in the affirmative.','Short answers repeat the helper: Yes, I do. · No, it doesn\'t.'],
+ ['I am · he / she / it is · you / we / they are + verb-ing.','Spelling: run → running, put → putting (double the consonant); make → making (drop the e); die → dying (ie → y).'],
+ ['Negative: am not / isn\'t / aren\'t + -ing. Question: Am / Is / Are + subject + -ing?','No do or does in the present continuous! Is she working? · She isn\'t working.'],
+ ['Every sentence is about now or around now: am / is / are + -ing.','Short answers repeat am / is / are: Yes, I am. · No, it isn\'t.'],
+ ['Habits and routines say how often something happens. Now means this moment, or a period around now.','Eight cards go with each tense. Look! and Listen! tell you something is happening now.'],
+ ['Find the key expression in every sentence first: Look!, every hour, Listen!, every day, at the moment, every night.','Now or around now → continuous. Habit, timetable, always true → simple. Questions and negatives follow the same rule.'],
+ ['Underline the key expression before every gap: usually, every night, this week, right now, often, never, at the moment.','Habits (usually, every night, often, never) → simple. Now or temporary (this week, right now, at the moment) → continuous.'],
+ ['Two kinds of guilty sentences: the wrong tense for the key expression, or a broken form (wrong helper, -s after does, don\'t + -ing).','Five sentences are guilty, five are innocent. Know is a state verb: it doesn\'t go in the continuous, even with now.']
+];
+const NOTES=[
+ ['Present simple · form',['I / you / we / they <i>work</i> · he / she / it <i>works</i>','Spelling: <i>watches, goes, does, studies, flies, has</i> · but <i>plays</i>']],
+ ['Present simple · negatives and questions',['<i>I don\'t work · she doesn\'t work</i>','<i>Do you work? · Does she work? · When does she work?</i>']],
+ ['Present simple · use',['Habits, routines, timetables, things always true.','Key: always, usually, often, never, every morning, on Sundays, How often…? · <i>Yes, I do. / No, it doesn\'t.</i>']],
+ ['Present continuous · form',['I <i>am</i> · he / she / it <i>is</i> · you / we / they <i>are</i> + verb-ing','Spelling: <i>swimming, stopping, running · writing, making · lying</i>']],
+ ['Present continuous · negatives and questions',['<i>I\'m not working · she isn\'t working · they aren\'t working</i>','<i>Am I working? · Is she working? · What are you doing?</i>']],
+ ['Present continuous · use',['Now, around now, temporary situations.','Key: now, right now, at the moment, today, this week, these days, Look!, Listen! · <i>Yes, I am. / No, it isn\'t.</i>']],
+ ['Key expressions',['Present simple: always, usually, often, never, every day, every night, on Sundays, twice a week','Present continuous: now, right now, at the moment, today, this week, these days, Look!, Listen!']],
+ ['Choose with the key expression',['Look! / Listen! / at the moment → continuous: <i>isn\'t watching</i>.','every hour / every day / every night → simple: <i>Does it stop every night?</i>']],
+ ['Usual or temporary?',['<i>I usually work at night</i> = my normal routine (simple).','<i>This week I\'m not working at night</i> = temporary, different from usual (continuous).']],
+ ['Watch out',['State verbs (know, want, like, understand, belong) stay in the simple, even with now.','Never mix the two: <i>don\'t working</i> ✗ · <i>does he works</i> ✗ → <i>aren\'t working</i> · <i>does he work</i>']]
+];
+const PEN_HINT=120, PEN_WRONG=30;
+
+/* =================== STATE =================== */
+const KEY='mosg-escape-v6';
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function answers(r){
+  if(r.kind==='form'||r.kind==='gap')return r.data.map(x=>dec(x.a));
+  if(r.kind==='nq')return r.data.flatMap(x=>dec(x.a).split('|'));
+  return [];
+}
+const fresh=()=>({stage:'intro',team:'',duration:50*60,elapsed:0,since:null,penalty:0,hints:ROOMS.map(()=>0),solved:[],wrong:0,
+  t:ROOMS.map(r=>answers(r).map(()=>'')),tok:ROOMS.map(r=>answers(r).map(()=>null)),
+  b:ROOMS.map(r=>r.builds?r.builds.map(x=>({pool:shuffle([...dec(x.w).split(' '),...x.extra]),line:[],ok:null})):null),
+  sort:EXPR.map(()=>null),cams:CAMS.map(()=>null),diary:DIARY_O.map(()=>''),sus:[],finishedLeft:null,openedAt:''});
+let S=fresh();
+let FX={enter:false,key:-1,hint:false};
+/* Every time the link is opened the game starts from zero: nothing is restored. */
+try{localStorage.removeItem(KEY);}catch(e){}
+function save(){}
+
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const elapsed=()=>S.elapsed+(S.since?(Date.now()-S.since)/1000:0);
+const left=()=>S.duration-elapsed()-S.penalty;
+function fmt(sec){const neg=sec<0;sec=Math.abs(Math.round(sec));return (neg?'+':'')+Math.floor(sec/60)+':'+String(sec%60).padStart(2,'0');}
+const running=()=>!!S.since;
+function pause(){if(S.since){S.elapsed+=(Date.now()-S.since)/1000;S.since=null;save();}}
+function resume(){if(!S.since){S.since=Date.now();save();}}
+
+function norm(s){
+  s=(s||'').toLowerCase().replace(/[’‘`]/g,"'").replace(/[?.!,]/g,'').replace(/\s+/g,' ').trim();
+  s=s.replace(/\bisn't\b/g,'is not').replace(/\baren't\b/g,'are not').replace(/\bdoesn't\b/g,'does not').replace(/\bdon't\b/g,'do not')
+     .replace(/\bi'm\b/g,'i am').replace(/^'m\b/,'am').replace(/^'re\b/,'are').replace(/^'s\b/,'is')
+     .replace(/\b(you|we|they)'re\b/g,'$1 are').replace(/\b(he|she|it)'s\b/g,'$1 is');
+  return s.replace(/^(i|you|he|she|it|we|they) /,'').trim();
+}
+
+/* =================== GRAPHICS =================== */
+function doorSVG(open){
+  const n=ROOMS.length;
+  const lock=(r,i)=>{const got=S.solved.includes(i);const x=i%2?186:134,y=146+Math.floor(i/2)*44+(i%2?22:0);
+    return `<g transform="translate(${x} ${y})"><rect x="-17" y="-16" width="34" height="32" rx="3" fill="${got?'url(#brassd)':'#2a1a0e'}" stroke="#7a5e22"/>
+      <text x="0" y="-5" text-anchor="middle" font-family="DM Mono, monospace" font-size="7" fill="${got?'#2a1e08':'#c9a24a'}">${r.num}</text>
+      ${got?'<path d="M-6 6 l4 4 l8 -9" fill="none" stroke="#2a1e08" stroke-width="2.2"/>':'<circle cx="0" cy="4" r="3" fill="#c9a24a"/><rect x="-1.3" y="4" width="2.6" height="7" fill="#c9a24a"/>'}</g>`;};
+  const left=ROOMS.map((r,i)=>i%2?'':lock(r,i)).join(''), right=ROOMS.map((r,i)=>i%2?lock(r,i):'').join('');
+  const all=S.solved.length>=n;
+  const stars=[[100,70],[132,52],[205,60],[226,96],[118,120],[190,132],[150,96],[214,170],[96,180]].map(([x,y],k)=>`<circle class="star" style="animation-delay:${(k%4)*.5}s" cx="${x}" cy="${y}" r="${k%3?1.2:1.8}" fill="#fff"/>`).join('');
+  return `<svg class="vitrine door ${open?'opening':''}" viewBox="0 0 320 440" role="img" aria-label="${open?'The museum exit door swings open onto the night outside':`The museum exit door with ${n} locks, ${S.solved.length} open`}">
+  <defs>
+    <linearGradient id="doorw" x1="0" x2="1"><stop offset="0" stop-color="#4a2e18"/><stop offset=".5" stop-color="#6b4527"/><stop offset="1" stop-color="#3f2614"/></linearGradient>
+    <linearGradient id="brassd" x1="0" x2="1"><stop offset="0" stop-color="#9c7a2e"/><stop offset=".45" stop-color="#f0d68e"/><stop offset="1" stop-color="#a5822f"/></linearGradient>
+    <linearGradient id="beamd" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fff5d6" stop-opacity="${all?'.35':'.12'}"/><stop offset="1" stop-color="#fff5d6" stop-opacity="0"/></linearGradient>
+    <linearGradient id="night" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#101b33"/><stop offset=".7" stop-color="#2e4a72"/><stop offset="1" stop-color="#e9b45a"/></linearGradient>
+    <clipPath id="archclip"><path d="M74 430 V114 a86 86 0 0 1 172 0 V430 Z"/></clipPath>
+  </defs>
+  <polygon points="140,0 180,0 290,430 30,430" fill="url(#beamd)"/>
+  <path d="M60 430 V110 a100 100 0 0 1 200 0 V430 Z" fill="#2c1b0f"/>
+  <g clip-path="url(#archclip)">
+    <rect x="74" y="28" width="172" height="402" fill="url(#night)"/>
+    <circle cx="200" cy="84" r="15" fill="#f6eccb"/><circle cx="206" cy="80" r="13" fill="#1a2a48"/>
+    ${stars}
+    <path d="M74 360 L110 330 L130 342 L150 318 L176 336 L200 322 L246 352 V430 H74 Z" fill="#0d1526"/>
+    <path d="M150 430 L158 360 L162 360 L170 430 Z" fill="#f0d68e" opacity=".45"/>
+  </g>
+  <g class="leaf leafL">
+    <path d="M74 430 V114 a86 86 0 0 1 86 -86 V430 Z" fill="url(#doorw)" stroke="#2c1b0f" stroke-width="2"/>
+    <rect x="88" y="384" width="58" height="34" fill="none" stroke="#2c1b0f" opacity=".6"/>
+    ${left}
+  </g>
+  <g class="leaf leafR">
+    <path d="M160 28 a86 86 0 0 1 86 86 V430 H160 Z" fill="url(#doorw)" stroke="#2c1b0f" stroke-width="2"/>
+    <rect x="174" y="384" width="58" height="34" fill="none" stroke="#2c1b0f" opacity=".6"/>
+    ${right}
+  </g>
+  <rect x="112" y="80" width="96" height="24" rx="2" fill="#0f1714" stroke="#7a5e22" class="exitsign"/>
+  <text x="160" y="97" text-anchor="middle" font-family="DM Mono, monospace" font-size="12" letter-spacing="3" fill="${all?'#74e0a1':'#ff6b5b'}" class="exitsign">EXIT</text>
+  </svg>`;
+}
+const ROPE=`<svg class="rope" viewBox="0 0 600 26" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M8 6 Q154 30 300 6 Q446 30 592 6" fill="none" stroke="#8f1f2c" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="8" cy="6" r="6" fill="#c9a24a"/><circle cx="300" cy="6" r="6" fill="#c9a24a"/><circle cx="592" cy="6" r="6" fill="#c9a24a"/></svg>`;
+
+/* =================== RAIL =================== */
+function renderRail(){
+  const r=document.getElementById('rail');
+  const playing=typeof S.stage==='number';
+  const toks=ROOMS.map((x,i)=>{const got=S.solved.includes(i);return `<span class="tok ${got?'got':''} ${S.stage===i?'here':''} ${FX.key===i?'newkey':''}" title="Key ${x.num}${got?' found':' (not found yet)'}">${x.num}</span>`;}).join('');
+  r.innerHTML=`<div class="brand"><small>After closing time</small>Museum of Stolen Grammar</div>
+    ${S.stage==='intro'?'':`<div class="tokens" aria-label="Keys found">${toks}</div>`}
+    ${playing?`<div class="clock"><span class="time" id="time" aria-label="Time left"></span><button class="mini" id="pausebtn" type="button">${running()?'Pause':'Resume'}</button></div>`:''}
+    ${S.stage==='intro'?'':`<div class="restart"><button class="mini restartbtn" type="button" data-act="railreset">↺ Restart</button></div>`}`;
+  tick();
+}
+function tick(){const t=document.getElementById('time');if(!t)return;const l=left();t.textContent=fmt(l);t.classList.toggle('over',l<0);}
+setInterval(tick,500);
+
+/* =================== PIECES =================== */
+function sign(i){
+  const R=ROOMS[i];
+  return `<div class="sign"><div class="num">${R.num}</div><div class="kicker">Room ${R.num} of ${ROOMS.length} · ${R.sub}</div><h2>${R.name}</h2></div>
+   <p class="story">${R.story}</p>${ROPE}`;
+}
+function hintsBlock(i){
+  const n=S.hints[i];
+  return `<section class="hints" aria-label="Hints">
+    ${HINTS[i].slice(0,n).map((h,k)=>`<div class="hint ${FX.hint&&k===n-1?'fresh':''}"><b>HINT ${k+1}</b>${h}</div>`).join('')}
+    ${n<HINTS[i].length?`<div class="hintrow"><button class="btn ghost" type="button" data-act="hint">Ask the curator for a hint</button><span>Costs 2 minutes</span></div>`:''}
+  </section>`;
+}
+function unlockBlock(i){
+  const [t,items]=NOTES[i];
+  return `<div class="unlock" role="status">
+    <div class="coin" aria-hidden="true">${ROOMS[i].num}</div>
+    <div><h3>Room solved · Key ${ROOMS[i].num}</h3><p>Behind the frame you find a brass key. ${i<LAST?`The exit door has ${ROOMS.length} locks: ${ROOMS.length-S.solved.length} still closed.`:'It is the last one. The exit door is waiting.'}</p></div>
+    <div class="casenote"><b>Case note · ${t}</b><ul>${items.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+    <button class="btn" type="button" data-act="next">${i<LAST?'Go to Room '+ROOMS[i+1].num+' →':'Open the exit door →'}</button>
+  </div>`;
+}
+const okc=v=>v===true?'ok':v===false?'bad':'';
+function tin(i,n,label,solved,ph){return `<input class="ti ${okc(S.tok[i][n])}" id="t${n}" data-n="${n}" value="${esc(S.t[i][n])}" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="${esc(label)}" ${ph?`placeholder="${esc(ph)}"`:''} ${solved?'disabled':''}>`;}
+
+/* =================== VIEWS =================== */
+function vForm(i,r,solved){
+  return `<div class="tablewrap"><table class="forms"><thead><tr><th>Subject + verb</th><th>${r.col} · affirmative</th></tr></thead><tbody>
+   ${r.data.map((f,j)=>`<tr style="--i:${j}"><td>${f.s} <span>/ ${f.v}</span></td><td>${tin(i,j,f.s+' '+f.v+', '+r.col,solved,f.s+' …')}</td></tr>`).join('')}
+  </tbody></table></div>`;
+}
+function vNQ(i,r,solved){
+  const st=S.b[i];
+  return `<p class="legend" style="margin:0 0 8px">PART A · Negative and question</p>
+  <div class="tablewrap"><table class="forms"><thead><tr><th>Subject + verb</th><th>Negative −</th><th>Question ?</th></tr></thead><tbody>
+   ${r.data.map((f,j)=>`<tr style="--i:${j}"><td>${f.s} <span>/ ${f.v}</span></td>${[0,1].map(k=>`<td>${tin(i,j*2+k,f.s+' '+f.v+(k?', question':', negative'),solved)}</td>`).join('')}</tr>`).join('')}
+  </tbody></table></div>
+  <p class="legend" style="margin:26px 0 8px">PART B · Rebuild the statements</p>
+  <div class="builds">${r.builds.map((b,j)=>{const x=st[j];
+    return `<div class="build ${okc(x.ok)}" style="--i:${j}">
+      <div class="from"><b>${b.type}</b><span>${j+1}. ${esc(b.from)}</span></div>
+      <div class="line" aria-label="Your sentence ${j+1}">${x.line.map((p,k)=>`<button class="chip" type="button" data-act="unpick" data-b="${j}" data-k="${k}" ${solved?'disabled':''}>${esc(x.pool[p])}</button>`).join('')}</div>
+      <div class="chips">${x.pool.map((w,p)=>`<button class="chip ${x.line.includes(p)?'used':''}" type="button" data-act="pick" data-b="${j}" data-p="${p}" ${solved||x.line.includes(p)?'disabled':''}>${esc(w)}</button>`).join('')}</div>
+      ${solved?'':`<button class="clear" type="button" data-act="clearb" data-b="${j}">Clear</button>`}
+    </div>`;}).join('')}</div>`;
+}
+function vGap(i,r,solved){
+  return `<div class="labels">${r.data.map((it,j)=>{
+    const h=esc(it.t).replace(/\[\[(.+?)\]\]/g,'<mark class="key">$1</mark>').replace('{_}',tin(i,j,'Gap '+(j+1)+': '+it.b,solved)+` <span class="base">(${esc(it.b)})</span>`);
+    return `<div class="lbl ${okc(S.tok[i][j])}" style="--i:${j}"><span class="cat">${i===2?'CAT.':'LIVE'} ${String(j+1).padStart(2,'0')}</span><span class="txt">${h}</span></div>`;}).join('')}</div>`;
+}
+function vCams(i,r,solved){
+  return `<div class="cams">${CAMS.map((c,j)=>{const ch=S.cams[j];return `<div class="cam" style="--i:${j}">
+     <div class="camhead"><span>${c.cam}</span><span class="rec">● REC ${c.time}</span></div>
+     <p class="camtext">${c.pre?c.pre+' ':''}<span class="blank">${ch!=null?esc(c.o[ch]):'?'}</span>${c.post==='.'?'.':' '+c.post}</p>
+     <div class="opts">${c.o.map((o,k)=>`<button class="opt" type="button" data-act="cam" data-j="${j}" data-k="${k}" aria-pressed="${ch===k}" ${solved?'disabled':''}>${esc(o)}</button>`).join('')}</div>
+   </div>`;}).join('')}</div>`;
+}
+function vDiary(i,r,solved){
+  let html=esc(DIARY_TXT);
+  DIARY_O.forEach((o,j)=>{html=html.replace(`{${j}}`,`<select id="d${j}" data-j="${j}" aria-label="Gap ${j+1}" ${solved?'disabled':''}><option value="">…</option>${o.map((x,k)=>`<option value="${k}" ${S.diary[j]===String(k)?'selected':''}>${esc(x)}</option>`).join('')}</select>`);});
+  return `<div class="diary"><span class="date">WEDNESDAY, 11.20 PM</span>${html}</div>`;
+}
+function vSus(i,r,solved){
+  return `<div class="suspects">${SUSPECTS.map((s,j)=>`<button class="sus" style="--i:${j}" type="button" data-act="sus" data-j="${j}" aria-pressed="${S.sus.includes(j)}" ${solved?'disabled':''}><span class="tag">SUSPECT ${j+1}</span><span class="say">"${esc(s)}"</span></button>`).join('')}</div>`;
+}
+function vSort(i,r,solved){
+  const shelf=v=>EXPR.filter((x,j)=>S.sort[j]===v).map(esc).join(' · ')||'empty';
+  return `<div class="sorts">${EXPR.map((x,j)=>{const v=S.sort[j];return `<div class="sortc ${v===0?'ps':v===1?'pc':''}" style="--i:${j}"><span class="expr">${esc(x)}</span>
+    <span class="seg"><button type="button" data-act="sort" data-j="${j}" data-v="0" aria-pressed="${v===0}" ${solved?'disabled':''}>PS</button><button type="button" data-act="sort" data-j="${j}" data-v="1" aria-pressed="${v===1}" ${solved?'disabled':''}>PC</button></span></div>`;}).join('')}</div>
+   <div class="showcases">
+     <div class="showcase"><b>Present simple</b><span>${shelf(0)}</span></div>
+     <div class="showcase"><b>Present continuous</b><span>${shelf(1)}</span></div>
+   </div>`;
+}
+const BODY={sort:vSort,form:vForm,nq:vNQ,gap:vGap,cams:vCams,diary:vDiary,sus:vSus};
+function vRoom(i){
+  const r=ROOMS[i],solved=S.solved.includes(i);
+  return `<section class="${FX.enter?'enter':''}">${FX.enter?'<div class="curtain" aria-hidden="true"><i></i><i></i></div>':''}${sign(i)}<div class="frame"><p class="task">${r.task}</p>${BODY[r.kind](i,r,solved)}
+   ${solved?unlockBlock(i):`<div class="actions"><button class="btn" type="button" data-act="check">Check</button><p class="msg" id="msg" aria-live="polite"></p></div>${hintsBlock(i)}`}</div></section>`;
+}
+
+function vIntro(){
+  return `<section class="hero">
+    <div>
+      <div class="kick">An escape room · present simple &amp; present continuous</div>
+      <h1>Locked in after <em>closing time</em></h1>
+      <p class="story">You stayed too long in the Museum of Stolen Grammar and the doors locked behind you. The exit door has ten locks. The keys are hidden in ten rooms, and every room is a grammar puzzle.</p>
+      <ul class="rules">
+        <li><span>i</span><span>Ten rooms, in order. Every room you solve gives you a brass key and opens the next one.</span></li>
+        <li><span>ii</span><span>First the present simple, then the present continuous, then the key expressions, then the two together.</span></li>
+        <li><span>iii</span><span>A wrong check costs 30 seconds. A hint from the curator costs 2 minutes.</span></li>
+        <li><span>iv</span><span>Read the case note after each room: you need it in the next ones.</span></li>
+      </ul>
+      <ul class="plan">${ROOMS.map(r=>`<li>${r.num} · ${r.sub}</li>`).join('')}</ul>
+    </div>
+    <div class="introdoor">${doorSVG()}</div>
+  </section>
+  <form class="ticket" id="setup">
+    <label for="team">Team name<input id="team" maxlength="30" placeholder="e.g. The Night Visitors" value="${esc(S.team)}"></label>
+    <label for="mins">Time on the clock<select id="mins">${[40,45,50,55,60].map(m=>`<option value="${m}" ${S.duration===m*60?'selected':''}>${m} minutes</option>`).join('')}</select></label>
+    <button class="btn" type="submit">Enter the museum</button>
+  </form>
+  ${typeof S.stage==='number'||S.solved.length?'':''}
+  <p class="reset">Every time you open the link, the game starts from zero. Use <b>↺ Restart</b> at the top to begin again.</p>`;
+}
+
+function notebookHTML(){
+  return `<p class="task"><b>Your notebook.</b> Everything you used tonight, in one place.</p>
+     <div class="notebook">
+      <div class="nb"><h3>Present simple</h3><dl>
+        <dt>Use</dt><dd>habits, routines, timetables, things always true</dd>
+        <dt>Key</dt><dd>always, usually, often, never, every day, on Sundays, twice a week, How often…?</dd>
+        <dt>+</dt><dd>I work · she work<b>s</b> · he watch<b>es</b> · she stud<b>ies</b> · it <b>has</b></dd>
+        <dt>−</dt><dd>I <b>don't</b> work · she <b>doesn't</b> work</dd>
+        <dt>?</dt><dd><b>Do</b> you work? · <b>Does</b> she work?</dd>
+        <dt>Short</dt><dd>Yes, I <b>do</b>. · No, she <b>doesn't</b>.</dd></dl></div>
+      <div class="nb"><h3>Present continuous</h3><dl>
+        <dt>Use</dt><dd>now, around now, temporary situations</dd>
+        <dt>Key</dt><dd>now, right now, at the moment, today, this week, these days, Look!, Listen!</dd>
+        <dt>+</dt><dd>I <b>am</b> work<b>ing</b> · she <b>is</b> stop<b>ping</b> · they <b>are</b> writ<b>ing</b></dd>
+        <dt>−</dt><dd>I'm <b>not</b> working · she <b>isn't</b> · they <b>aren't</b></dd>
+        <dt>?</dt><dd><b>Are</b> you working? · <b>Is</b> she working?</dd>
+        <dt>Short</dt><dd>Yes, I <b>am</b>. · No, she <b>isn't</b>.</dd></dl></div>
+     </div>`;
+}
+function vWin(){
+  const l=S.finishedLeft,h=S.hints.reduce((a,b)=>a+b,0);
+  return `<section>
+   <div class="sign"><div class="num">✦</div><div class="kicker">All ${ROOMS.length} keys found</div><h2>${esc(S.team||'Your team')} escaped the museum</h2></div>
+   <div class="frame" style="margin-top:26px">
+     <div class="case"><div class="doorwrap">${doorSVG(true)}<button class="mini replay" type="button" data-act="replay">Open it again</button></div>
+      <div>
+        <div class="legend">EXIT · OPEN</div>
+        <p class="motto">The last lock turns and the door opens.</p>
+        <p>You repaired the habits, followed what was happening now and caught every guilty sentence. The Museum of Stolen Grammar has its verbs back.</p>
+        <div class="stats"><div><b>${esc(S.openedAt)}</b>door opened at</div><div><b>${fmt(l)}</b>${l<0?'overtime':'time left'}</div><div><b>${h}</b>hints</div><div><b>${S.wrong}</b>wrong tries</div></div>
+      </div></div>
+     ${notebookHTML()}
+     <div class="actions"><button class="btn ghost" type="button" data-act="askreset">Play again</button><span id="resetask"></span></div>
+   </div>${sparkles()}</section>`;
+}
+function sparkles(){
+  let h='';for(let k=0;k<36;k++){const x=(k*37)%100,d=2.6+((k*13)%30)/10,dl=2.4+((k*7)%25)/10,sz=4+(k%4)*2;
+    h+=`<i style="left:${x}%;width:${sz}px;height:${sz}px;animation-duration:${d}s;animation-delay:${dl}s"></i>`;}
+  return `<div class="sparkles" aria-hidden="true">${h}</div>`;
+}
+
+/* =================== RENDER =================== */
+function render(){
+  renderRail();
+  document.getElementById('app').innerHTML=S.stage==='intro'?vIntro():S.stage==='win'?vWin():vRoom(S.stage);
+  FX.enter=false;FX.hint=false;
+  const c=document.querySelector('.curtain');if(c)setTimeout(()=>c.remove(),1600);
+}
+function say(t,ok){const m=document.getElementById('msg');if(m){m.textContent=t;m.className='msg '+(ok?'ok':'bad');}}
+function shake(sel){const el=document.querySelector(sel);if(!el)return;el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake');}
+function fail(text){S.penalty+=PEN_WRONG;S.wrong++;save();tick();say(text+' (−30 seconds)');shake('.frame');}
+function solve(){const i=S.stage;if(!S.solved.includes(i))S.solved.push(i);FX.key=i;save();render();setTimeout(()=>{FX.key=-1;},1800);}
+function goTop(){try{window.scrollTo({top:0});}catch(e){}}
+
+function check(){
+  const i=S.stage,r=ROOMS[i];
+  if(r.kind==='form'||r.kind==='gap'||r.kind==='nq'){
+    const ans=answers(r);let bad=0;
+    ans.forEach((a,n)=>{const ok=norm(S.t[i][n])===a;S.tok[i][n]=ok;if(!ok)bad++;});
+    let badB=0;
+    if(r.builds)r.builds.forEach((bd,j)=>{const x=S.b[i][j];const ok=x.line.map(p=>x.pool[p]).join(' ')===dec(bd.w);x.ok=ok;if(!ok)badB++;});
+    save();
+    if(!bad&&!badB)return solve();
+    render();
+    if(r.builds)fail(`Part A: ${ans.length-bad} of ${ans.length} right. Part B: ${r.builds.length-badB} of ${r.builds.length} right. Fix the red ones.`);
+    else fail(`${ans.length-bad} of ${ans.length} right. Fix the red ones.`);
+  }
+  else if(r.kind==='sort'){
+    if(S.sort.includes(null)){say('Put every expression in a showcase first.');return;}
+    const key=dec(EXPR_A);const right=S.sort.filter((v,j)=>String(v)===key[j]).length;
+    if(right===EXPR.length)return solve();
+    fail(`${right} of ${EXPR.length} expressions are in the right showcase.`);
+  }
+  else if(r.kind==='cams'){
+    if(S.cams.includes(null)){say('Choose a verb for every camera first.');return;}
+    const key=dec(CAMS_A);const right=S.cams.filter((v,j)=>String(v)===key[j]).length;
+    if(right===CAMS.length)return solve();
+    fail(`${right} of ${CAMS.length} cameras are right. The report is rejected.`);
+  }
+  else if(r.kind==='diary'){
+    if(S.diary.includes('')){say('Choose a verb for every gap first.');return;}
+    const key=dec(DIARY_A);const right=S.diary.filter((v,j)=>v===key[j]).length;
+    if(right===DIARY_O.length)return solve();
+    fail(`${right} of ${DIARY_O.length} gaps are right. Read the key expressions again.`);
+  }
+  else if(r.kind==='sus'){
+    const g=dec(GUILTY).split(',').map(Number);const caught=S.sus.filter(j=>g.includes(j)).length,wrongA=S.sus.length-caught;
+    if(caught===g.length&&!wrongA)return solve();
+    fail(wrongA?`You arrested ${wrongA} innocent sentence${wrongA>1?'s':''}. The curator sends everyone back.`:`Some guilty sentences are still free: you have ${caught} of them.`);
+  }
+}
+
+/* =================== EVENTS =================== */
+document.addEventListener('submit',e=>{
+  e.preventDefault();
+  if(e.target.id!=='setup')return;
+  const team=document.getElementById('team').value.trim(),dur=+document.getElementById('mins').value*60;
+  S=fresh();S.team=team;S.duration=dur;S.stage=0;S.since=Date.now();FX.enter=true;save();render();goTop();
+});
+document.addEventListener('input',e=>{
+  const t=e.target;
+  if(t.classList.contains('ti')){const i=S.stage,n=+t.dataset.n;S.t[i][n]=t.value;S.tok[i][n]=null;t.classList.remove('ok','bad');const l=t.closest('.lbl');if(l)l.className='lbl';save();}
+});
+document.addEventListener('change',e=>{if(e.target.matches('.diary select')){S.diary[+e.target.dataset.j]=e.target.value;save();}});
+document.addEventListener('click',e=>{
+  if(e.target.id==='pausebtn'){running()?pause():resume();renderRail();return;}
+  const b=e.target.closest('[data-act]');if(!b||b.disabled)return;
+  const a=b.dataset.act;
+  if(a==='check')check();
+  else if(a==='pick'||a==='unpick'||a==='clearb'){
+    const x=S.b[S.stage][+b.dataset.b];
+    if(a==='pick')x.line.push(+b.dataset.p);else if(a==='unpick')x.line.splice(+b.dataset.k,1);else x.line=[];
+    x.ok=null;save();render();
+  }
+  else if(a==='replay'){const svg=document.querySelector('svg.door');if(svg){svg.classList.remove('opening');void svg.getBoundingClientRect();svg.classList.add('opening');}}
+  else if(a==='sort'){S.sort[+b.dataset.j]=+b.dataset.v;save();render();}
+  else if(a==='cam'){S.cams[+b.dataset.j]=+b.dataset.k;save();render();}
+  else if(a==='sus'){const j=+b.dataset.j;S.sus=S.sus.includes(j)?S.sus.filter(x=>x!==j):[...S.sus,j];save();b.setAttribute('aria-pressed',S.sus.includes(j));}
+  else if(a==='hint'){const i=S.stage;if(S.hints[i]<HINTS[i].length){S.hints[i]++;S.penalty+=PEN_HINT;FX.hint=true;save();render();}}
+  else if(a==='next'){if(S.stage>=LAST){S.finishedLeft=left();S.openedAt=new Date().toLocaleTimeString('en-GB');pause();S.stage='win';}else{S.stage++;FX.enter=true;}save();render();goTop();}
+  else if(a==='askreset'){const r=document.getElementById('resetask');if(r)r.innerHTML='Delete all progress? <button class="mini" type="button" data-act="reset">Yes, start again</button>';}
+  else if(a==='railreset'){
+    if(b.dataset.armed){doReset();}
+    else{b.dataset.armed='1';b.textContent='Sure? Click again';b.classList.add('armed');setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent='↺ Restart';b.classList.remove('armed');}},4000);}
+  }
+  else if(a==='reset'){doReset();}
+});
+
+function doReset(){try{localStorage.removeItem(KEY);}catch(err){}FX={enter:false,key:-1,hint:false};S=fresh();render();goTop();}
+window.claude?.hot?.snapshot?.(()=>S);
+render();
+</script>
+
+</body></html>
